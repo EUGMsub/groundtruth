@@ -1,0 +1,10 @@
+{"id": "case-01", "domain": "geography", "prompt": "What is the capital of France?", "expected": "Paris", "match": "exact"}
+{"id": "case-02", "domain": "science", "prompt": "What are Earth's four main layers?", "expected": "crust, mantle, outer core, inner core", "match": "contains"}
+{"id": "case-03", "domain": "math", "prompt": "What is 12 times 8?", "expected": "96", "match": "exact"}
+{"id": "case-04", "domain": "general", "prompt": "Name three primary colors.", "expected": "red, blue, yellow", "match": "contains"}
+{"id": "case-05", "domain": "history", "prompt": "What year did World War II end?", "expected": "1945", "match": "exact"}
+{"id": "case-06", "domain": "science", "prompt": "Define the word 'photosynthesis'.", "expected": "process by which plants convert light into energy", "match": "contains"}
+{"id": "case-07", "domain": "geography", "prompt": "How many continents are there?", "expected": "7", "match": "exact"}
+{"id": "case-08", "domain": "science", "prompt": "What is the boiling point of water in Celsius?", "expected": "100", "match": "exact"}
+{"id": "case-09", "domain": "literature", "prompt": "Who wrote 'Pride and Prejudice'?", "expected": "Jane Austen", "match": "exact"}
+{"id": "case-10", "domain": "science", "prompt": "What is the chemical symbol for gold?", "expected": "Au", "match": "exact"}

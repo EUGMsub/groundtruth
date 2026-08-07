@@ -1,10 +1,10 @@
-{"id": "case-01", "domain": "geography", "prompt": "What is the capital of France?", "expected": "Paris", "match": "exact"}
-{"id": "case-02", "domain": "science", "prompt": "What are Earth's four main layers?", "expected": "crust, mantle, outer core, inner core", "match": "contains"}
-{"id": "case-03", "domain": "math", "prompt": "What is 12 times 8?", "expected": "96", "match": "exact"}
-{"id": "case-04", "domain": "general", "prompt": "Name three primary colors.", "expected": "red, blue, yellow", "match": "contains"}
-{"id": "case-05", "domain": "history", "prompt": "What year did World War II end?", "expected": "1945", "match": "exact"}
-{"id": "case-06", "domain": "science", "prompt": "Define the word 'photosynthesis'.", "expected": "process by which plants convert light into energy", "match": "contains"}
-{"id": "case-07", "domain": "geography", "prompt": "How many continents are there?", "expected": "7", "match": "exact"}
-{"id": "case-08", "domain": "science", "prompt": "What is the boiling point of water in Celsius?", "expected": "100", "match": "exact"}
-{"id": "case-09", "domain": "literature", "prompt": "Who wrote 'Pride and Prejudice'?", "expected": "Jane Austen", "match": "exact"}
-{"id": "case-10", "domain": "science", "prompt": "What is the chemical symbol for gold?", "expected": "Au", "match": "exact"}
+{"id": "case-01", "domain": "geography", "prompt": "What is the capital of Australia?", "expected": "Canberra", "match": "exact", "tier": "easy", "notes": "Single-word, single-spelling city name; often confused with Sydney, but Canberra is the undisputed legal capital of Australia."}
+{"id": "case-02", "domain": "math", "prompt": "What is 17 times 6?", "expected": "102", "match": "number", "tier": "easy", "notes": "Deterministic multiplication with one correct value; number match lets any output containing 102 pass regardless of surrounding work shown."}
+{"id": "case-03", "domain": "chemistry", "prompt": "What is the chemical symbol for potassium?", "expected": "K", "match": "exact", "tier": "easy", "notes": "IUPAC-standardized element symbol; exactly one correct token, no accepted variants."}
+{"id": "case-04", "domain": "history", "prompt": "In what year did the Berlin Wall fall?", "expected": "1989", "match": "number", "tier": "easy", "notes": "Single, well-documented calendar year with no competing or disputed dates."}
+{"id": "case-05", "domain": "literature", "prompt": "Who wrote the play 'Hamlet'?", "expected": "Shakespeare", "match": "contains", "tier": "easy", "notes": "Contains match accepts both 'Shakespeare' and 'William Shakespeare' since both are correct; exact would wrongly fail the fuller, equally valid answer."}
+{"id": "case-06", "domain": "math", "prompt": "What is 144 divided by 12?", "expected": "12", "match": "number", "tier": "easy", "notes": "Deterministic division with a single correct quotient."}
+{"id": "case-07", "domain": "biology", "prompt": "What does DNA stand for?", "expected": "deoxyribonucleic acid", "match": "contains", "tier": "easy", "notes": "Short fixed phrase every correct expansion must include verbatim, regardless of whether the answer also spells out the acronym first."}
+{"id": "case-08", "domain": "math", "prompt": "What is the square root of 169?", "expected": "13", "match": "number", "tier": "easy", "notes": "Principal square root of a perfect square is single-valued and universally agreed upon; no unstated assumptions about sign or convention."}
+{"id": "case-09", "domain": "computer science", "prompt": "What does HTTP stand for?", "expected": "hypertext transfer protocol", "match": "contains", "tier": "easy", "notes": "Standardized acronym expansion (IETF); short unambiguous phrase any correct answer must include."}
+{"id": "case-10", "domain": "astronomy", "prompt": "What is the closest planet to the Sun?", "expected": "Mercury", "match": "exact", "tier": "easy", "notes": "Single-word, undisputed astronomical fact with one correct spelling."}

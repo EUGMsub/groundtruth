@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import datetime
 import glob
 import json
 import os
@@ -8,6 +9,7 @@ import sys
 
 NUMBER_RE = re.compile(r"-?\d[\d,]*\.?\d*")
 NUMBER_TOLERANCE = 0.01
+NO_RESULT_REASON = "no result recorded for this case"
 
 
 def load_jsonl(path):
@@ -80,7 +82,7 @@ GRADERS = {
 
 def grade_case(case, result):
     if result is None:
-        return False, None, "no result recorded for this case"
+        return False, None, NO_RESULT_REASON
 
     match_type = case.get("match")
     grader = GRADERS.get(match_type)
@@ -89,6 +91,47 @@ def grade_case(case, result):
 
     passed, why = grader(result.get("output"), case.get("expected"))
     return passed, result.get("output"), why
+
+
+def build_report(cases, results_by_id, graded_lines, run_id):
+    cases_by_id = {c["id"]: c for c in cases}
+    total = len(graded_lines)
+    passed_count = sum(1 for g in graded_lines if g["passed"])
+    pass_rate = (passed_count / total * 100) if total else 0.0
+    model = next((r.get("model") for r in results_by_id.values() if r.get("model")), "unknown")
+    date = datetime.date.today().isoformat()
+
+    lines = ["# Grading Report", ""]
+    lines.append(f"**Date:** {date} · **Run:** {run_id} · **Model:** {model} · **Pass rate:** {passed_count}/{total} ({pass_rate:.0f}%)")
+    lines.append("")
+
+    lines.append("## Cases")
+    lines.append("")
+    lines.append("| ID | Match | Result |")
+    lines.append("|---|---|---|")
+    for g in graded_lines:
+        mark = "PASS" if g["passed"] else "FAIL"
+        lines.append(f"| {g['id']} | {g['match']} | {mark} |")
+    lines.append("")
+
+    lines.append("## Failures")
+    lines.append("")
+    failures = [g for g in graded_lines if not g["passed"]]
+    if not failures:
+        lines.append("None — every case passed.")
+    for g in failures:
+        prompt = cases_by_id.get(g["id"], {}).get("prompt", "(prompt unavailable)")
+        if g["why"] == NO_RESULT_REASON:
+            got_display = "no result — the runner hasn't produced an answer for this case yet"
+        else:
+            got_display = g["got"] if g["got"] not in (None, "") else "(empty output)"
+        lines.append(f"### {g['id']}")
+        lines.append(f"- Prompt: {prompt}")
+        lines.append(f"- Expected: {g['expected']}")
+        lines.append(f"- Got: {got_display}")
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def main():
@@ -130,8 +173,13 @@ def main():
         for line in graded_lines:
             f.write(json.dumps(line) + "\n")
 
+    report_path = "report.md"
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(build_report(cases, results_by_id, graded_lines, run_id))
+
     print(f"{passed_count} / {len(cases)} passed")
     print(f"wrote {graded_path}")
+    print(f"wrote {report_path}")
 
 
 if __name__ == "__main__":

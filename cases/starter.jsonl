@@ -8,3 +8,23 @@
 {"id": "case-08", "domain": "math", "prompt": "What is the square root of 169?", "expected": "13", "match": "number", "tier": "easy", "notes": "Principal square root of a perfect square is single-valued and universally agreed upon; no unstated assumptions about sign or convention."}
 {"id": "case-09", "domain": "computer science", "prompt": "What does HTTP stand for?", "expected": "hypertext transfer protocol", "match": "contains", "tier": "easy", "notes": "Standardized acronym expansion (IETF); short unambiguous phrase any correct answer must include."}
 {"id": "case-10", "domain": "astronomy", "prompt": "What is the closest planet to the Sun?", "expected": "Mercury", "match": "exact", "tier": "easy", "notes": "Single-word, undisputed astronomical fact with one correct spelling."}
+{"id": "case-11", "domain": "math", "prompt": "What is 9 squared?", "expected": "81", "match": "number", "tier": "easy", "notes": "Standard arithmetic fact."}
+{"id": "case-12", "domain": "math", "prompt": "What is 15 plus 27?", "expected": "42", "match": "number", "tier": "easy", "notes": "Standard arithmetic fact."}
+{"id": "case-13", "domain": "math", "prompt": "What is the square root of 225?", "expected": "15", "match": "number", "tier": "easy", "notes": "Standard arithmetic fact."}
+{"id": "case-14", "domain": "geography", "prompt": "What is the capital of Canada?", "expected": "Ottawa", "match": "exact", "tier": "easy", "notes": "Official capital city of Canada."}
+{"id": "case-15", "domain": "geography", "prompt": "What is the capital of Egypt?", "expected": "Cairo", "match": "exact", "tier": "easy", "notes": "Official capital city of Egypt."}
+{"id": "case-16", "domain": "geography", "prompt": "How many states are there in the United States?", "expected": "50", "match": "number", "tier": "easy", "notes": "Fixed count under U.S. law."}
+{"id": "case-17", "domain": "chemistry", "prompt": "What is the chemical symbol for iron?", "expected": "Fe", "match": "exact", "tier": "easy", "notes": "Periodic table symbol for iron."}
+{"id": "case-18", "domain": "chemistry", "prompt": "What is the chemical symbol for silver?", "expected": "Ag", "match": "exact", "tier": "easy", "notes": "Periodic table symbol for silver."}
+{"id": "case-19", "domain": "chemistry", "prompt": "What is the atomic number of hydrogen?", "expected": "1", "match": "number", "tier": "easy", "notes": "Periodic table atomic number for hydrogen."}
+{"id": "case-20", "domain": "biology", "prompt": "What is the powerhouse of the cell called?", "expected": "mitochondria", "match": "contains", "tier": "easy", "notes": "Standard biology textbook term."}
+{"id": "case-21", "domain": "biology", "prompt": "What is the basic unit of heredity called?", "expected": "gene", "match": "exact", "tier": "easy", "notes": "Standard biology textbook term."}
+{"id": "case-22", "domain": "biology", "prompt": "What is the process by which a cell divides to form two identical daughter cells called?", "expected": "mitosis", "match": "contains", "tier": "easy", "notes": "Standard biology textbook term."}
+{"id": "case-23", "domain": "history", "prompt": "In what year did World War I end?", "expected": "1918", "match": "number", "tier": "easy", "notes": "Recorded end date of World War I."}
+{"id": "case-24", "domain": "history", "prompt": "In what year did humans first land on the Moon?", "expected": "1969", "match": "number", "tier": "easy", "notes": "Recorded date of the first crewed Moon landing."}
+{"id": "case-25", "domain": "literature", "prompt": "Who wrote 'Romeo and Juliet'?", "expected": "Shakespeare", "match": "contains", "tier": "easy", "notes": "Author of record for this play."}
+{"id": "case-26", "domain": "literature", "prompt": "Who wrote the novel '1984'?", "expected": "Orwell", "match": "contains", "tier": "easy", "notes": "Author of record for this novel."}
+{"id": "case-27", "domain": "computer science", "prompt": "What does CPU stand for?", "expected": "central processing unit", "match": "contains", "tier": "easy", "notes": "Standard computing acronym expansion."}
+{"id": "case-28", "domain": "computer science", "prompt": "What does RAM stand for?", "expected": "random access memory", "match": "contains", "tier": "easy", "notes": "Standard computing acronym expansion."}
+{"id": "case-29", "domain": "astronomy", "prompt": "What is Earth's only natural satellite called?", "expected": "Moon", "match": "contains", "tier": "easy", "notes": "Common name for Earth's natural satellite."}
+{"id": "case-30", "domain": "astronomy", "prompt": "What is the star at the center of our solar system called?", "expected": "Sun", "match": "contains", "tier": "easy", "notes": "Common name for the Sun as a star."}

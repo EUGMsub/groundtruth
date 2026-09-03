@@ -5,6 +5,7 @@ import json
 import sys
 
 REQUIRED_KEYS = ["id", "domain", "prompt", "expected", "match", "tier"]
+VALID_MATCH_TYPES = {"exact", "contains", "number", "judge"}
 
 
 def find_case_files():
@@ -38,6 +39,11 @@ def validate_files(paths):
                 for key in REQUIRED_KEYS:
                     if key not in record:
                         problems.append(f"{path} line {line_number}: missing key '{key}'")
+
+                if "match" in record and record["match"] not in VALID_MATCH_TYPES:
+                    problems.append(
+                        f"{path} line {line_number}: invalid match type '{record['match']}'"
+                    )
 
                 case_id = record.get("id")
                 if case_id is not None:

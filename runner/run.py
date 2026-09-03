@@ -20,6 +20,15 @@ def generate_run_id():
         counter += 1
     return f"{today}-{counter}"
 
+def read_multiline_answer():
+    lines = []
+    while True:
+        line = input()
+        if line == "":
+            break
+        lines.append(line)
+    return "\n".join(lines)
+
 def write_results(cases, run_id):
     output_path = f"results/{run_id}.jsonl"
     with open(output_path, "w") as f:
@@ -34,14 +43,38 @@ def write_results(cases, run_id):
             f.write(json.dumps(result) + "\n")
     return output_path
 
+def write_results_manual(cases, run_id):
+    output_path = f"results/{run_id}.jsonl"
+    with open(output_path, "w") as f:
+        for i, case in enumerate(cases, start=1):
+            print(f"\n--- Case {i} of {len(cases)}: {case['id']} ---")
+            print(case["prompt"])
+            print("(paste your answer, then press Enter on a blank line to finish)")
+            answer = read_multiline_answer()
+
+            result = {
+                "id": case["id"],
+                "run_id": run_id,
+                "model": "manual",
+                "output": answer,
+                "error": None
+            }
+            f.write(json.dumps(result) + "\n")
+    return output_path
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--cases", required=True)
+    parser.add_argument("--manual", action="store_true")
     args = parser.parse_args()
 
     cases = read_cases(args.cases)
     run_id = generate_run_id()
-    output_path = write_results(cases, run_id)
+
+    if args.manual:
+        output_path = write_results_manual(cases, run_id)
+    else:
+        output_path = write_results(cases, run_id)
 
     print(f"Wrote {len(cases)} results to {output_path}")
 

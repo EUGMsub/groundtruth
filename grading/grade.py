@@ -6,10 +6,47 @@ import json
 import os
 import re
 import sys
+import urllib.error
+import urllib.request
+
+def load_dotenv(path=".env"):
+    if not os.path.exists(path):
+        return
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            key, sep, value = line.partition("=")
+            if not sep:
+                continue
+            key, value = key.strip(), value.strip()
+            if key and key not in os.environ:
+                os.environ[key] = value
+
+
+load_dotenv()
 
 NUMBER_RE = re.compile(r"-?\d[\d,]*\.?\d*")
 NUMBER_TOLERANCE = 0.01
 NO_RESULT_REASON = "no result recorded for this case"
+
+JUDGE_MODEL = "claude-haiku-4-5-20251001"
+ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
+
+JUDGE_PROMPT_TEMPLATE = """You are grading a candidate answer against a reference answer for factual correctness.
+
+Question: {prompt}
+
+Reference answer: {expected}
+
+Candidate answer: {output}
+
+Judge the candidate answer strictly. Mark it FAIL if it contains ANY incorrect factual claim, even if the rest of the answer is broadly correct or close to the reference answer. Do not give credit for being "close enough" - a single wrong fact, date, name, number, or causal claim is enough to fail the answer. Only mark it PASS if every factual claim in the candidate answer is correct and consistent with the reference answer.
+
+State your verdict once and do not revise it. Do not reconsider or second-guess your answer after stating it. Your first stated verdict is final.
+
+Respond with exactly one line: the word PASS or FAIL, followed by a single sentence explaining why. Do not include anything else."""
 
 
 def load_jsonl(path):
@@ -30,13 +67,19 @@ def normalize(text):
     return (text or "").strip().lower()
 
 
-def extract_number(text):
+# "Last number" is a heuristic, not a guarantee: it fixes cases where the
+# model restates the input number before answering, but can misfire if the
+# model appends a trailing number afterward (a caveat, a citation, a year).
+# A stricter fix would require the model to emit its answer in a fixed
+# format, e.g. "Answer: <number>", and parse that explicitly.
+def extract_number(text, use_last=False):
     if not text:
         return None
-    match = NUMBER_RE.search(text)
-    if not match:
+    matches = NUMBER_RE.findall(text)
+    if not matches:
         return None
-    return float(match.group().replace(",", ""))
+    match = matches[-1] if use_last else matches[0]
+    return float(match.replace(",", ""))
 
 
 def latest_results_file():
@@ -64,13 +107,53 @@ def grade_number(output, expected):
     want_num = extract_number(expected)
     if want_num is None:
         return False, f"case error: no number in expected value '{expected}'"
-    got_num = extract_number(output)
+    got_num = extract_number(output, use_last=True)
     if got_num is None:
         return False, f"no number found in output '{output}'"
     diff = abs(got_num - want_num)
     if diff <= NUMBER_TOLERANCE:
         return True, f"{got_num} within {NUMBER_TOLERANCE} of {want_num}"
     return False, f"{got_num} not within {NUMBER_TOLERANCE} of {want_num} (diff {diff})"
+
+
+def grade_judge(output, expected, prompt):
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return False, "case error: ANTHROPIC_API_KEY not set"
+
+    judge_prompt = JUDGE_PROMPT_TEMPLATE.format(
+        prompt=prompt or "(prompt unavailable)",
+        expected=expected,
+        output=output if output not in (None, "") else "(empty output)",
+    )
+
+    body = json.dumps({
+        "model": JUDGE_MODEL,
+        "max_tokens": 250,
+        "messages": [{"role": "user", "content": judge_prompt}],
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        ANTHROPIC_API_URL,
+        data=body,
+        headers={
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            response = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.URLError as e:
+        return False, f"judge call failed: {e}"
+
+    verdict = response["content"][0]["text"].strip()
+    calls = re.findall(r"\b(PASS|FAIL)\b", verdict, re.IGNORECASE)
+    passed = bool(calls) and calls[-1].upper() == "PASS"
+    return passed, verdict
 
 
 GRADERS = {
@@ -85,12 +168,19 @@ def grade_case(case, result):
         return False, None, NO_RESULT_REASON
 
     match_type = case.get("match")
+    output = result.get("output")
+    expected = case.get("expected")
+
+    if match_type == "judge":
+        passed, why = grade_judge(output, expected, case.get("prompt"))
+        return passed, output, why
+
     grader = GRADERS.get(match_type)
     if grader is None:
-        return False, result.get("output"), f"unknown match type '{match_type}'"
+        return False, output, f"unknown match type '{match_type}'"
 
-    passed, why = grader(result.get("output"), case.get("expected"))
-    return passed, result.get("output"), why
+    passed, why = grader(output, expected)
+    return passed, output, why
 
 
 def build_report(cases, results_by_id, graded_lines, run_id):

@@ -27,6 +27,10 @@ def load_dotenv(path=".env"):
 
 load_dotenv()
 
+# The leading -? can misread a hyphen/en-dash in a range like "9-10" as a
+# negative sign, producing -10.0 instead of 10.0. Currently harmless since
+# it doesn't affect matching, but worth knowing if a future expected value
+# is itself negative.
 NUMBER_RE = re.compile(r"-?\d[\d,]*\.?\d*")
 NUMBER_TOLERANCE = 0.01
 NO_RESULT_REASON = "no result recorded for this case"
@@ -67,19 +71,15 @@ def normalize(text):
     return (text or "").strip().lower()
 
 
-# "Last number" is a heuristic, not a guarantee: it fixes cases where the
-# model restates the input number before answering, but can misfire if the
-# model appends a trailing number afterward (a caveat, a citation, a year).
-# A stricter fix would require the model to emit its answer in a fixed
-# format, e.g. "Answer: <number>", and parse that explicitly.
-def extract_number(text, use_last=False):
+def extract_numbers(text):
     if not text:
-        return None
-    matches = NUMBER_RE.findall(text)
-    if not matches:
-        return None
-    match = matches[-1] if use_last else matches[0]
-    return float(match.replace(",", ""))
+        return []
+    return [float(m.replace(",", "")) for m in NUMBER_RE.findall(text)]
+
+
+def extract_number(text):
+    numbers = extract_numbers(text)
+    return numbers[0] if numbers else None
 
 
 def latest_results_file():
@@ -103,17 +103,23 @@ def grade_contains(output, expected):
     return False, f"'{want}' not found in output"
 
 
+# Checks every number in the output, not just the first or last: the model
+# may restate the input before answering, or append an unrelated-but-true
+# number afterward (a caveat, a citation, a "check my work" aside), and the
+# correct answer can land anywhere among those. This can still misfire if a
+# wrong number in the output happens to coincide with the expected value,
+# but that's rarer than the model producing more than one true number.
 def grade_number(output, expected):
     want_num = extract_number(expected)
     if want_num is None:
         return False, f"case error: no number in expected value '{expected}'"
-    got_num = extract_number(output, use_last=True)
-    if got_num is None:
+    got_nums = extract_numbers(output)
+    if not got_nums:
         return False, f"no number found in output '{output}'"
-    diff = abs(got_num - want_num)
-    if diff <= NUMBER_TOLERANCE:
-        return True, f"{got_num} within {NUMBER_TOLERANCE} of {want_num}"
-    return False, f"{got_num} not within {NUMBER_TOLERANCE} of {want_num} (diff {diff})"
+    for got_num in got_nums:
+        if abs(got_num - want_num) <= NUMBER_TOLERANCE:
+            return True, f"{got_num} within {NUMBER_TOLERANCE} of {want_num} (matched among {got_nums})"
+    return False, f"none of {got_nums} within {NUMBER_TOLERANCE} of {want_num}"
 
 
 def grade_judge(output, expected, prompt):

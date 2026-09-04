@@ -40,10 +40,10 @@ def extract_number(text):
 
 
 def latest_results_file():
-    files = sorted(glob.glob("results/*.jsonl"))
+    files = glob.glob("results/*.jsonl")
     if not files:
         sys.exit("No results/*.jsonl files found. Pass --results path/to/file.jsonl.")
-    return files[-1]
+    return max(files, key=os.path.getmtime)
 
 
 def grade_exact(output, expected):

@@ -2,10 +2,12 @@ import json
 import argparse
 from datetime import date
 import os
+import time
 
 import anthropic
 
 LIVE_MODEL = "claude-sonnet-4-6"
+LIVE_CALL_PAUSE_SECONDS = 1
 
 
 def load_env(path=".env"):
@@ -28,6 +30,12 @@ def read_cases(filepath):
                 case = json.loads(line)
                 cases.append(case)
     return cases
+
+def filter_cases(cases, filter_arg):
+    field, _, value = filter_arg.partition("=")
+    if not _:
+        raise ValueError(f"--filter must be field=value, got: {filter_arg!r}")
+    return [case for case in cases if str(case.get(field)) == value]
 
 def generate_run_id():
     today = date.today().isoformat()
@@ -115,6 +123,9 @@ def write_results_live(cases, run_id):
                 print(f"error: {e}")
 
             f.write(json.dumps(result) + "\n")
+
+            if i < len(cases):
+                time.sleep(LIVE_CALL_PAUSE_SECONDS)
     return output_path
 
 
@@ -124,9 +135,12 @@ def main():
     parser.add_argument("--manual", action="store_true")
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--filter", default=None, help="field=value, e.g. domain=science")
     args = parser.parse_args()
 
     cases = read_cases(args.cases)
+    if args.filter is not None:
+        cases = filter_cases(cases, args.filter)
     if args.limit is not None:
         cases = cases[:args.limit]
     run_id = generate_run_id()

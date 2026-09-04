@@ -1,0 +1,3 @@
+{"id": "case-01", "run_id": "2026-09-03-3", "model": "claude-sonnet-4-6", "output": "The capital of Australia is **Canberra**. It became the capital in 1913, chosen as a compromise between the rival cities of Sydney and Melbourne.", "error": null}
+{"id": "case-02", "run_id": "2026-09-03-3", "model": "claude-sonnet-4-6", "output": "17 times 6 is **102**.", "error": null}
+{"id": "case-03", "run_id": "2026-09-03-3", "model": "claude-sonnet-4-6", "output": "The chemical symbol for potassium is **K**, derived from the Latin word *Kalium*.", "error": null}

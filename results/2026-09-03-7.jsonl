@@ -1,0 +1,2 @@
+{"id": "case-01", "run_id": "2026-09-03-7", "model": "claude-sonnet-4-6", "output": "The capital of Australia is **Canberra**. It was purpose-built to serve as the capital and is located in the Australian Capital Territory (ACT). Canberra was selected as a compromise between the rival cities of Sydney and Melbourne.", "error": null}
+{"id": "case-02", "run_id": "2026-09-03-7", "model": "claude-sonnet-4-6", "output": "17 times 6 is **102**.", "error": null}

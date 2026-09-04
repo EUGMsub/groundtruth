@@ -86,7 +86,7 @@ def write_results_manual(cases, run_id):
             f.write(json.dumps(result) + "\n")
     return output_path
 
-def write_results_live(cases, run_id):
+def write_results_live(cases, run_id, model=LIVE_MODEL):
     load_env()
     client = anthropic.Anthropic()
 
@@ -97,7 +97,7 @@ def write_results_live(cases, run_id):
 
             try:
                 response = client.messages.create(
-                    model=LIVE_MODEL,
+                    model=model,
                     max_tokens=1024,
                     messages=[{"role": "user", "content": case["prompt"]}],
                 )
@@ -107,7 +107,7 @@ def write_results_live(cases, run_id):
                 result = {
                     "id": case["id"],
                     "run_id": run_id,
-                    "model": LIVE_MODEL,
+                    "model": model,
                     "output": answer,
                     "error": None,
                 }
@@ -116,7 +116,7 @@ def write_results_live(cases, run_id):
                 result = {
                     "id": case["id"],
                     "run_id": run_id,
-                    "model": LIVE_MODEL,
+                    "model": model,
                     "output": None,
                     "error": str(e),
                 }
@@ -136,6 +136,7 @@ def main():
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--filter", default=None, help="field=value, e.g. domain=science")
+    parser.add_argument("--model", default=LIVE_MODEL, help="model to use in --live mode")
     args = parser.parse_args()
 
     cases = read_cases(args.cases)
@@ -148,7 +149,7 @@ def main():
     if args.manual:
         output_path = write_results_manual(cases, run_id)
     elif args.live:
-        output_path = write_results_live(cases, run_id)
+        output_path = write_results_live(cases, run_id, model=args.model)
     else:
         output_path = write_results(cases, run_id)
 

@@ -1,6 +1,6 @@
 # Grading Report
 
-**Date:** 2026-09-03 · **Run:** 2026-09-03-4 · **Model:** claude-sonnet-4-6 · **Pass rate:** 24/50 (48%)
+**Date:** 2026-09-03 · **Run:** 2026-09-03-4 · **Model:** claude-sonnet-4-6 · **Pass rate:** 29/56 (52%)
 
 ## Cases
 
@@ -9,26 +9,26 @@
 | case-01 | exact | FAIL |
 | case-02 | number | PASS |
 | case-03 | exact | FAIL |
-| case-04 | number | FAIL |
+| case-04 | number | PASS |
 | case-05 | contains | PASS |
 | case-06 | number | PASS |
 | case-07 | contains | PASS |
-| case-08 | number | FAIL |
+| case-08 | number | PASS |
 | case-09 | contains | PASS |
 | case-10 | exact | FAIL |
 | case-11 | number | PASS |
 | case-12 | number | PASS |
-| case-13 | number | FAIL |
+| case-13 | number | PASS |
 | case-14 | exact | FAIL |
 | case-15 | exact | FAIL |
-| case-16 | number | FAIL |
+| case-16 | number | PASS |
 | case-17 | exact | FAIL |
 | case-18 | exact | FAIL |
 | case-19 | number | PASS |
 | case-20 | contains | PASS |
 | case-21 | contains | PASS |
 | case-22 | contains | PASS |
-| case-23 | number | FAIL |
+| case-23 | number | PASS |
 | case-24 | number | PASS |
 | case-25 | contains | PASS |
 | case-26 | contains | PASS |
@@ -56,6 +56,12 @@
 | case-48 | contains | FAIL |
 | case-49 | exact | FAIL |
 | case-50 | judge | FAIL |
+| case-51 | contains | FAIL |
+| case-52 | contains | FAIL |
+| case-53 | contains | FAIL |
+| case-54 | contains | FAIL |
+| case-55 | number | FAIL |
+| case-56 | contains | FAIL |
 
 ## Failures
 
@@ -69,29 +75,10 @@
 - Expected: K
 - Got: The chemical symbol for potassium is **K**, derived from the Latin word *Kalium*.
 
-### case-04
-- Prompt: In what year did the Berlin Wall fall?
-- Expected: 1989
-- Got: The Berlin Wall fell in **1989**, on the night of **November 9–10**. This event marked a pivotal moment in the end of the Cold War and led to the reunification of Germany in 1990.
-
-### case-08
-- Prompt: What is the square root of 169?
-- Expected: 13
-- Got: The square root of 169 is **13**.
-
-(Since 13 × 13 = 169)
-
 ### case-10
 - Prompt: What is the closest planet to the Sun?
 - Expected: Mercury
 - Got: The closest planet to the Sun is **Mercury**. It orbits the Sun at an average distance of about 57.9 million kilometers (36 million miles), completing one orbit approximately every 88 Earth days.
-
-### case-13
-- Prompt: What is the square root of 225?
-- Expected: 15
-- Got: The square root of 225 is **15**.
-
-This is because 15 × 15 = 225.
 
 ### case-14
 - Prompt: What is the capital of Canada?
@@ -103,11 +90,6 @@ This is because 15 × 15 = 225.
 - Expected: Cairo
 - Got: The capital of Egypt is **Cairo**. It is the largest city in Egypt and in the Arab world, serving as the country's political, cultural, and economic center.
 
-### case-16
-- Prompt: How many states are there in the United States?
-- Expected: 50
-- Got: There are **50 states** in the United States. The most recent states admitted were Alaska and Hawaii, both in **1959**.
-
 ### case-17
 - Prompt: What is the chemical symbol for iron?
 - Expected: Fe
@@ -117,11 +99,6 @@ This is because 15 × 15 = 225.
 - Prompt: What is the chemical symbol for silver?
 - Expected: Ag
 - Got: The chemical symbol for silver is **Ag**, derived from the Latin word *argentum*.
-
-### case-23
-- Prompt: In what year did World War I end?
-- Expected: 1918
-- Got: World War I ended in **1918**, with the Armistice signed on November 11, 1918, taking effect at the 11th hour of the 11th day of the 11th month. The war was formally concluded with the **Treaty of Versailles** in 1919.
 
 ### case-35
 - Prompt: Why did Gutenberg's printing press have such a large impact on the spread of information in 15th-century Europe?
@@ -301,4 +278,34 @@ Freezing takes this further by essentially halting microbial activity almost com
 ### case-50
 - Prompt: In physics, does the term 'quantum leap' refer to an enormous, dramatic change, or the smallest possible discrete change a system can undergo?
 - Expected: It refers to the smallest possible discrete change: an abrupt jump between two adjacent quantized states, such as an electron changing energy levels, not a large or dramatic change.
+- Got: no result — the runner hasn't produced an answer for this case yet
+
+### case-51
+- Prompt: What does GDP stand for?
+- Expected: gross domestic product
+- Got: no result — the runner hasn't produced an answer for this case yet
+
+### case-52
+- Prompt: What is the term for a sustained increase in the general price level of goods and services in an economy?
+- Expected: inflation
+- Got: no result — the runner hasn't produced an answer for this case yet
+
+### case-53
+- Prompt: What is the SI unit of force?
+- Expected: newton
+- Got: no result — the runner hasn't produced an answer for this case yet
+
+### case-54
+- Prompt: What do the initials 'CAD' stand for in engineering and design?
+- Expected: computer-aided design
+- Got: no result — the runner hasn't produced an answer for this case yet
+
+### case-55
+- Prompt: How many milliliters are in 1 liter?
+- Expected: 1000
+- Got: no result — the runner hasn't produced an answer for this case yet
+
+### case-56
+- Prompt: What instrument is used to measure atmospheric pressure?
+- Expected: barometer
 - Got: no result — the runner hasn't produced an answer for this case yet

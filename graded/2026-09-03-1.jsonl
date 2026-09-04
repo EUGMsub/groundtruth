@@ -1,0 +1,56 @@
+{"id": "case-01", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "Canberra", "got": "Canberra", "why": "exact match"}
+{"id": "case-02", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "102", "got": "102", "why": "102.0 within 0.01 of 102.0 (matched among [102.0])"}
+{"id": "case-03", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "K", "got": "K", "why": "exact match"}
+{"id": "case-04", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "1989", "got": "1989", "why": "1989.0 within 0.01 of 1989.0 (matched among [1989.0])"}
+{"id": "case-05", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "Shakespeare", "got": "Shakespeare", "why": "'shakespeare' found in output"}
+{"id": "case-06", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "12", "got": "12", "why": "12.0 within 0.01 of 12.0 (matched among [12.0])"}
+{"id": "case-07", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "deoxyribonucleic acid", "got": "deoxyribonucleic acid", "why": "'deoxyribonucleic acid' found in output"}
+{"id": "case-08", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "13", "got": "13", "why": "13.0 within 0.01 of 13.0 (matched among [13.0])"}
+{"id": "case-09", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "hypertext transfer protocol", "got": "hypertext transfer protocol", "why": "'hypertext transfer protocol' found in output"}
+{"id": "case-10", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "Mercury", "got": "Mercury", "why": "exact match"}
+{"id": "case-11", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "81", "got": "81", "why": "81.0 within 0.01 of 81.0 (matched among [81.0])"}
+{"id": "case-12", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "42", "got": "42", "why": "42.0 within 0.01 of 42.0 (matched among [42.0])"}
+{"id": "case-13", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "15", "got": "15", "why": "15.0 within 0.01 of 15.0 (matched among [15.0])"}
+{"id": "case-14", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "Ottawa", "got": "Ottawa", "why": "exact match"}
+{"id": "case-15", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "Cairo", "got": "Cairo", "why": "exact match"}
+{"id": "case-16", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "50", "got": "50", "why": "50.0 within 0.01 of 50.0 (matched among [50.0])"}
+{"id": "case-17", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "Fe", "got": "Fe", "why": "exact match"}
+{"id": "case-18", "run_id": "2026-09-03-1", "passed": true, "match": "exact", "expected": "Ag", "got": "Ag", "why": "exact match"}
+{"id": "case-19", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "1", "got": "1", "why": "1.0 within 0.01 of 1.0 (matched among [1.0])"}
+{"id": "case-20", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "mitochondria", "got": "mitochondria", "why": "'mitochondria' found in output"}
+{"id": "case-21", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "gene", "got": "gene", "why": "'gene' found in output"}
+{"id": "case-22", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "mitosis", "got": "mitosis", "why": "'mitosis' found in output"}
+{"id": "case-23", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "1918", "got": "1918", "why": "1918.0 within 0.01 of 1918.0 (matched among [1918.0])"}
+{"id": "case-24", "run_id": "2026-09-03-1", "passed": true, "match": "number", "expected": "1969", "got": "1969", "why": "1969.0 within 0.01 of 1969.0 (matched among [1969.0])"}
+{"id": "case-25", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "Shakespeare", "got": "Shakespeare", "why": "'shakespeare' found in output"}
+{"id": "case-26", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "Orwell", "got": "Orwell", "why": "'orwell' found in output"}
+{"id": "case-27", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "central processing unit", "got": "central processing unit", "why": "'central processing unit' found in output"}
+{"id": "case-28", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "random access memory", "got": "random access memory", "why": "'random access memory' found in output"}
+{"id": "case-29", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "Moon", "got": "Moon", "why": "'moon' found in output"}
+{"id": "case-30", "run_id": "2026-09-03-1", "passed": true, "match": "contains", "expected": "Sun", "got": "Sun", "why": "'sun' found in output"}
+{"id": "case-31", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "Heat travels through the metal by conduction, moving from the hotter end (in the tea) toward the cooler end (the handle) until the handle also warms up.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-32", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "As the Moon orbits Earth, the angle between the Sun, Earth, and Moon changes, so we see different portions of the Moon's sunlit half. It is not caused by Earth's shadow.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-33", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "With more of the good available and buyer demand the same, sellers must compete harder to sell it, pushing the price down until the market reaches a new equilibrium.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-34", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "Binary search compares the target to the middle element and eliminates half of the remaining items each step, so it needs far fewer comparisons than checking each item in order, especially as the list grows large.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-35", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "It allowed text to be copied mechanically and quickly instead of by hand, sharply cutting the cost and time to produce books, so far more copies could be made and reach far more people.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-36", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "Iron reacts with oxygen and moisture in the air to form iron oxide (rust). Gold is much less chemically reactive and does not readily react with oxygen or water under normal conditions.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-37", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "Air becomes thinner and less able to hold heat as altitude increases, so temperature drops with elevation. The tiny difference in distance to the Sun has no meaningful effect.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-38", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "The curved arch shape converts the downward weight into compression forces that travel along the curve of the stones down into the supports at each end. Stone is very strong when compressed, so the arch holds together under load without needing mortar.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-39", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "The novel depicts a totalitarian government that constantly monitors and controls citizens' actions and even their thoughts, making it a widely used reference point for warning about excessive state surveillance and authoritarian control.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-40", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "Cold temperatures slow the growth and reproduction of the bacteria and other microorganisms that cause food to spoil, so the food stays safe to eat for longer.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-41", "run_id": "2026-09-03-1", "passed": false, "match": "number", "expected": "3", "got": null, "why": "no result recorded for this case"}
+{"id": "case-42", "run_id": "2026-09-03-1", "passed": false, "match": "exact", "expected": "mhtirogla", "got": null, "why": "no result recorded for this case"}
+{"id": "case-43", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "15 years", "got": null, "why": "no result recorded for this case"}
+{"id": "case-44", "run_id": "2026-09-03-1", "passed": false, "match": "number", "expected": "12146271", "got": null, "why": "no result recorded for this case"}
+{"id": "case-45", "run_id": "2026-09-03-1", "passed": false, "match": "exact", "expected": "m", "got": null, "why": "no result recorded for this case"}
+{"id": "case-46", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "To weaken or drain someone of energy, vitality, or strength. It does not mean to energize, invigorate, or excite someone.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-47", "run_id": "2026-09-03-1", "passed": false, "match": "exact", "expected": "Rabat", "got": null, "why": "no result recorded for this case"}
+{"id": "case-48", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "The Last Man", "got": null, "why": "no result recorded for this case"}
+{"id": "case-49", "run_id": "2026-09-03-1", "passed": false, "match": "exact", "expected": "Maine", "got": null, "why": "no result recorded for this case"}
+{"id": "case-50", "run_id": "2026-09-03-1", "passed": false, "match": "judge", "expected": "It refers to the smallest possible discrete change: an abrupt jump between two adjacent quantized states, such as an electron changing energy levels, not a large or dramatic change.", "got": null, "why": "no result recorded for this case"}
+{"id": "case-51", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "gross domestic product", "got": null, "why": "no result recorded for this case"}
+{"id": "case-52", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "inflation", "got": null, "why": "no result recorded for this case"}
+{"id": "case-53", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "newton", "got": null, "why": "no result recorded for this case"}
+{"id": "case-54", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "computer-aided design", "got": null, "why": "no result recorded for this case"}
+{"id": "case-55", "run_id": "2026-09-03-1", "passed": false, "match": "number", "expected": "1000", "got": null, "why": "no result recorded for this case"}
+{"id": "case-56", "run_id": "2026-09-03-1", "passed": false, "match": "contains", "expected": "barometer", "got": null, "why": "no result recorded for this case"}

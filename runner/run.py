@@ -2,6 +2,7 @@ import json
 import argparse
 from datetime import date
 import os
+import sys
 import time
 import uuid
 
@@ -68,21 +69,27 @@ def write_results(cases, run_id):
 
 def write_results_manual(cases, run_id):
     output_path = f"results/{run_id}.jsonl"
+    saved = 0
     with open(output_path, "w") as f:
-        for i, case in enumerate(cases, start=1):
-            print(f"\n--- Case {i} of {len(cases)}: {case['id']} ---")
-            print(case["prompt"])
-            print("(paste your answer, then press Enter on a blank line to finish)")
-            answer = read_multiline_answer()
+        try:
+            for i, case in enumerate(cases, start=1):
+                print(f"\n--- Case {i} of {len(cases)}: {case['id']} ---")
+                print(case["prompt"])
+                print("(paste your answer, then press Enter on a blank line to finish)")
+                answer = read_multiline_answer()
 
-            result = {
-                "id": case["id"],
-                "run_id": run_id,
-                "model": "manual",
-                "output": answer,
-                "error": None
-            }
-            f.write(json.dumps(result) + "\n")
+                result = {
+                    "id": case["id"],
+                    "run_id": run_id,
+                    "model": "manual",
+                    "output": answer,
+                    "error": None
+                }
+                f.write(json.dumps(result) + "\n")
+                saved += 1
+        except KeyboardInterrupt:
+            print(f"\nInterrupted — saved {saved} answers to {output_path}")
+            sys.exit(0)
     return output_path
 
 def write_results_live(cases, run_id, model=LIVE_MODEL):

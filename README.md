@@ -21,6 +21,8 @@
 
 This section assumes you've never run a Python program from a terminal before. A **terminal** (also called a command line or shell) is the text-based window where you type commands instead of clicking things — on Windows that's PowerShell or Git Bash, on Mac/Linux it's usually called Terminal.
 
+> **Windows users:** every command below uses `python3`. On Windows, use `python` instead — substitute it in for every command in this doc.
+
 ### 1. Clone the repo
 
 **Cloning** means downloading a copy of this project (with its full history) onto your computer. In your terminal, run:
@@ -46,12 +48,17 @@ python3 -m pip install anthropic
 
 The `--live` mode (step 5c below) needs an **API key** — a private password-like string that authenticates your requests to Anthropic and lets them bill your account for usage. Never share it or commit it to git.
 
-1. Create a file named `.env` in the project root (same folder as this README).
+1. Create a file named `.env` in the project root (same folder as this README). On Windows PowerShell:
+   ```
+   New-Item -ItemType File -Name .env
+   ```
+   Then open it for editing with `notepad .env` (or on Mac/Linux, `touch .env` and open it in any text editor).
 2. Put one line in it:
    ```
    ANTHROPIC_API_KEY=your-actual-key-here
    ```
 3. Save the file. `.env` is already listed in `.gitignore`, so git will never track or upload it.
+4. Double-check it worked by running `git status` — `.env` should **not** appear in the output (not even under untracked files). If it does show up, stop and fix your `.gitignore` before going any further; don't commit a file with your API key in it.
 
 If you skip this step, the default (stub) and `--manual` modes still work fine — only `--live` needs a key.
 
@@ -66,6 +73,8 @@ All commands below are run from the project root and follow this shape:
 ```
 python3 runner/run.py --cases <path-to-cases-file> [mode flag] [options]
 ```
+
+Anything in `<angle brackets>` or `[square brackets]` is a placeholder describing what goes there — fill in a real value, don't paste those brackets literally into your command.
 
 `--cases` is required and points at a cases file, e.g. `cases/starter.jsonl`.
 
@@ -93,6 +102,8 @@ Actually calls the Claude API for every case and records the real answer. Requir
 python3 runner/run.py --cases cases/starter.jsonl --live
 ```
 
+This costs real money — a full run against `cases/starter.jsonl` is small enough to cost a few cents on the default model. Use `--limit` (below) if you want to test on fewer cases first.
+
 `--live` supports three optional flags, which can be combined:
 
 - **`--model <model-id>`** — which Claude model to use (e.g. `claude-sonnet-4-6`, `claude-haiku-4-5`). Defaults to `claude-sonnet-4-6` if you don't set it.
@@ -103,7 +114,7 @@ python3 runner/run.py --cases cases/starter.jsonl --live
   ```
   python3 runner/run.py --cases cases/starter.jsonl --live --limit 3
   ```
-- **`--filter field=value`** — only run cases where that field matches that value (e.g. only the `math` domain). Check `cases/starter.jsonl` to see what fields exist on each case.
+- **`--filter field=value`** — only run cases where that field matches that value (e.g. only the `math` domain). The usual fields to filter on are `domain`, `tier`, and `match` — see `cases/README.md` for what values each one can take.
   ```
   python3 runner/run.py --cases cases/starter.jsonl --live --filter domain=math
   ```

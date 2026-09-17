@@ -19,3 +19,13 @@ Predicted PASS on 9 of 13 hard cases, including 5 of the 6 knowledge-based traps
 | case-48 | Mary Shelley's 1826 plague novel (besides Frankenstein) | PASS | *Confidence: low.* Going against my own reversal-curse reasoning here. The Last Man got a big pandemic-era revival, new Penguin and Broadview editions, a lot of coverage. It's less obscure than it was ten years ago. But I'm genuinely unsure and could see the retrieval failing. |
 | case-49 | Which state is the original Portland (namesake of Portland, OR) in? | PASS | *Confidence: medium.* Assumed this was obscure when I wrote it, but one source called it a story every third-grader in Oregon knows. That changed my mind. Retracting my original assumption. |
 | case-50 | Does 'quantum leap' mean a huge change or the smallest possible change? | PASS | *Confidence: medium.* "A quantum leap is actually tiny" is a popular science-communication correction in its own right. The model has likely absorbed the correction, not just the idiom. |
+
+## Results (2026-09-17)
+
+Scored 8/13. All 5 misses were FAIL predictions on structural cases (41, 42, 44, 45) that passed, plus case-40.
+
+My stated hypothesis — "knowledge traps don't work, only structural failures are genuinely hard" — was wrong in both halves. The structural cases passed too. Tokenization and multi-digit arithmetic are not reliable failure modes on this model.
+
+What actually failed: 6 of 7 failures were judge-mode cases — long explanatory answers containing a factual error. That's a different failure mode than anything I designed for, and the one worth targeting in a future hard tier.
+
+Open question: case-61 failed on exact-match-with-a-sentence, the same false-fail pattern I fixed in week 6. Needs the same fix.

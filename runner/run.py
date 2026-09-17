@@ -3,6 +3,7 @@ import argparse
 from datetime import date
 import os
 import time
+import uuid
 
 import anthropic
 
@@ -39,10 +40,8 @@ def filter_cases(cases, filter_arg):
 
 def generate_run_id():
     today = date.today().isoformat()
-    counter = 1
-    while os.path.exists(f"results/{today}-{counter}.jsonl"):
-        counter += 1
-    return f"{today}-{counter}"
+    suffix = uuid.uuid4().hex[:8]
+    return f"{today}-{suffix}"
 
 def read_multiline_answer():
     lines = []

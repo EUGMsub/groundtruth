@@ -39,7 +39,7 @@ One question per line, with the answer you already know.
 What the AI actually said, saved unedited, including failures.
 
 ```
-{"id": "units-001", "run_id": "2026-08-09-1", "model": "claude-sonnet-4-6", "output": "5280", "error": null}
+{"id": "units-001", "run_id": "2026-08-09-a3f9c2d1", "model": "claude-sonnet-4-6", "output": "5280", "error": null}
 ```
 
 ### `graded/<run_id>.jsonl` + `report.md` — produced by Track 03
@@ -47,7 +47,7 @@ What the AI actually said, saved unedited, including failures.
 Passed or failed, the reason, and a report a stranger can read.
 
 ```
-{"id": "units-001", "run_id": "2026-08-09-1", "passed": true, "match": "number", "expected": "5280", "got": "5280", "why": "number matched within tolerance"}
+{"id": "units-001", "run_id": "2026-08-09-a3f9c2d1", "passed": true, "match": "number", "expected": "5280", "got": "5280", "why": "number matched within tolerance"}
 ```
 
 ## D. Pick a track

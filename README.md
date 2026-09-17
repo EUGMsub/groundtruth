@@ -9,12 +9,12 @@
 
 `results/<run_id>.jsonl` — produced by Track 02. What the AI actually said, saved unedited:
 ```
-{"id": "units-001", "run_id": "2026-08-09-1", "model": "claude-sonnet-4-6", "output": "5280", "error": null}
+{"id": "units-001", "run_id": "2026-08-09-a3f9c2d1", "model": "claude-sonnet-4-6", "output": "5280", "error": null}
 ```
 
 `graded/<run_id>.jsonl` + `report.md` — produced by Track 03. Passed or failed, the reason, and a readable report:
 ```
-{"id": "units-001", "run_id": "2026-08-09-1", "passed": true, "match": "number", "expected": "5280", "got": "5280", "why": "number matched within tolerance"}
+{"id": "units-001", "run_id": "2026-08-09-a3f9c2d1", "passed": true, "match": "number", "expected": "5280", "got": "5280", "why": "number matched within tolerance"}
 ```
 
 ## Usage
@@ -57,7 +57,7 @@ If you skip this step, the default (stub) and `--manual` modes still work fine �
 
 ### 4. Where output goes
 
-Every run — no matter the mode — writes one file to the `results/` folder, named `<run_id>.jsonl` (e.g. `results/2026-09-03-1.jsonl`). A **run ID** is just today's date plus a counter, so multiple runs on the same day don't overwrite each other. `.jsonl` means "JSON Lines" — one JSON object per line, one line per case. The terminal will print the exact path when the run finishes.
+Every run — no matter the mode — writes one file to the `results/` folder, named `<run_id>.jsonl` (e.g. `results/2026-09-03-a3f9c2d1.jsonl`). A **run ID** is today's date plus a short random suffix, so multiple runs on the same day — even from different clones — don't collide or overwrite each other. `.jsonl` means "JSON Lines" — one JSON object per line, one line per case. The terminal will print the exact path when the run finishes.
 
 ### 5. Running the cases
 

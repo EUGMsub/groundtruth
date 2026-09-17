@@ -1,67 +1,35 @@
 # Grading Report
 
-**Date:** 2026-09-03 · **Run:** 2026-09-03-4 · **Model:** claude-sonnet-4-6 · **Pass rate:** 29/56 (52%)
+**Date:** 2026-09-03 · **Run:** 2026-09-03-4 · **Model:** claude-sonnet-4-6 · **Pass rate:** 29/40 answered (72%) · **Not run:** 16
 
-## Cases
+## Pass Rate by Domain
 
-| ID | Match | Result |
-|---|---|---|
-| case-01 | exact | FAIL |
-| case-02 | number | PASS |
-| case-03 | exact | FAIL |
-| case-04 | number | PASS |
-| case-05 | contains | PASS |
-| case-06 | number | PASS |
-| case-07 | contains | PASS |
-| case-08 | number | PASS |
-| case-09 | contains | PASS |
-| case-10 | exact | FAIL |
-| case-11 | number | PASS |
-| case-12 | number | PASS |
-| case-13 | number | PASS |
-| case-14 | exact | FAIL |
-| case-15 | exact | FAIL |
-| case-16 | number | PASS |
-| case-17 | exact | FAIL |
-| case-18 | exact | FAIL |
-| case-19 | number | PASS |
-| case-20 | contains | PASS |
-| case-21 | contains | PASS |
-| case-22 | contains | PASS |
-| case-23 | number | PASS |
-| case-24 | number | PASS |
-| case-25 | contains | PASS |
-| case-26 | contains | PASS |
-| case-27 | contains | PASS |
-| case-28 | contains | PASS |
-| case-29 | contains | PASS |
-| case-30 | contains | PASS |
-| case-31 | judge | PASS |
-| case-32 | judge | PASS |
-| case-33 | judge | PASS |
-| case-34 | judge | PASS |
-| case-35 | judge | FAIL |
-| case-36 | judge | FAIL |
-| case-37 | judge | PASS |
-| case-38 | judge | PASS |
-| case-39 | judge | FAIL |
-| case-40 | judge | FAIL |
-| case-41 | number | FAIL |
-| case-42 | exact | FAIL |
-| case-43 | contains | FAIL |
-| case-44 | number | FAIL |
-| case-45 | exact | FAIL |
-| case-46 | judge | FAIL |
-| case-47 | exact | FAIL |
-| case-48 | contains | FAIL |
-| case-49 | exact | FAIL |
-| case-50 | judge | FAIL |
-| case-51 | contains | FAIL |
-| case-52 | contains | FAIL |
-| case-53 | contains | FAIL |
-| case-54 | contains | FAIL |
-| case-55 | number | FAIL |
-| case-56 | contains | FAIL |
+Domain = subject area of the question.
+
+| Domain | Passed | Answered | Pass Rate | Not Run |
+|---|---|---|---|---|
+| astronomy | 3 | 4 | 75% | 0 |
+| biology | 4 | 5 | 80% | 0 |
+| chemistry | 1 | 5 | 20% | 0 |
+| computer science | 4 | 4 | 100% | 1 |
+| economics | 1 | 1 | 100% | 2 |
+| engineering | 1 | 1 | 100% | 2 |
+| geography | 2 | 5 | 40% | 1 |
+| history | 3 | 4 | 75% | 1 |
+| language | 0 | 0 | — | 3 |
+| literature | 3 | 4 | 75% | 1 |
+| math | 6 | 6 | 100% | 1 |
+| measurement | 0 | 0 | — | 3 |
+| physics | 1 | 1 | 100% | 1 |
+
+## Pass Rate by Tier
+
+Tier = difficulty level assigned when the case was written.
+
+| Tier | Passed | Answered | Pass Rate | Not Run |
+|---|---|---|---|---|
+| easy | 27 | 37 | 73% | 6 |
+| hard | 2 | 3 | 67% | 10 |
 
 ## Failures
 
@@ -230,82 +198,129 @@ Temperature is essentially controlling the *speed* of biological processes. Refr
 
 Freezing takes this further by essentially halting microbial activity almost completely.
 
+## Not Run
+
 ### case-41
 - Prompt: How many times does the letter 'e' appear in the word 'bookkeeper'?
 - Expected: 3
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-42
 - Prompt: What do you get if you spell the word 'algorithm' backwards? Answer with just the reversed word, nothing else.
 - Expected: mhtirogla
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-43
 - Prompt: Which is the longer period of time: 5,000 days, or 15 years? Answer using digits, e.g. "15 years" or "5,000 days".
 - Expected: 15 years
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-44
 - Prompt: What is 6,847,593 + 5,298,678?
 - Expected: 12146271
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-45
 - Prompt: What is the 4th letter from the end of the word 'government'? Answer with just the single letter, nothing else.
 - Expected: m
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-46
 - Prompt: What does the word 'enervate' mean?
 - Expected: To weaken or drain someone of energy, vitality, or strength. It does not mean to energize, invigorate, or excite someone.
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-47
 - Prompt: What is the capital of Morocco? Answer with just the city name.
 - Expected: Rabat
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-48
 - Prompt: Mary Shelley is best known for writing 'Frankenstein.' What is the title of the 1826 novel she wrote about a plague that wipes out most of humanity in a near-future world?
 - Expected: The Last Man
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-49
 - Prompt: The city of Portland, Oregon was named after another, older Portland by one of its two founders, decided by a coin flip in 1845. In which U.S. state is that original Portland located? Answer with just the state name.
 - Expected: Maine
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-50
 - Prompt: In physics, does the term 'quantum leap' refer to an enormous, dramatic change, or the smallest possible discrete change a system can undergo?
 - Expected: It refers to the smallest possible discrete change: an abrupt jump between two adjacent quantized states, such as an electron changing energy levels, not a large or dramatic change.
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-51
 - Prompt: What does GDP stand for?
 - Expected: gross domestic product
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-52
 - Prompt: What is the term for a sustained increase in the general price level of goods and services in an economy?
 - Expected: inflation
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-53
 - Prompt: What is the SI unit of force?
 - Expected: newton
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-54
 - Prompt: What do the initials 'CAD' stand for in engineering and design?
 - Expected: computer-aided design
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-55
 - Prompt: How many milliliters are in 1 liter?
 - Expected: 1000
-- Got: no result — the runner hasn't produced an answer for this case yet
 
 ### case-56
 - Prompt: What instrument is used to measure atmospheric pressure?
 - Expected: barometer
-- Got: no result — the runner hasn't produced an answer for this case yet
+
+## Cases
+
+| ID | Match | Result |
+|---|---|---|
+| case-01 | exact | FAIL |
+| case-02 | number | PASS |
+| case-03 | exact | FAIL |
+| case-04 | number | PASS |
+| case-05 | contains | PASS |
+| case-06 | number | PASS |
+| case-07 | contains | PASS |
+| case-08 | number | PASS |
+| case-09 | contains | PASS |
+| case-10 | exact | FAIL |
+| case-11 | number | PASS |
+| case-12 | number | PASS |
+| case-13 | number | PASS |
+| case-14 | exact | FAIL |
+| case-15 | exact | FAIL |
+| case-16 | number | PASS |
+| case-17 | exact | FAIL |
+| case-18 | exact | FAIL |
+| case-19 | number | PASS |
+| case-20 | contains | PASS |
+| case-21 | contains | PASS |
+| case-22 | contains | PASS |
+| case-23 | number | PASS |
+| case-24 | number | PASS |
+| case-25 | contains | PASS |
+| case-26 | contains | PASS |
+| case-27 | contains | PASS |
+| case-28 | contains | PASS |
+| case-29 | contains | PASS |
+| case-30 | contains | PASS |
+| case-31 | judge | PASS |
+| case-32 | judge | PASS |
+| case-33 | judge | PASS |
+| case-34 | judge | PASS |
+| case-35 | judge | FAIL |
+| case-36 | judge | FAIL |
+| case-37 | judge | PASS |
+| case-38 | judge | PASS |
+| case-39 | judge | FAIL |
+| case-40 | judge | FAIL |
+| case-41 | number | NOT RUN |
+| case-42 | exact | NOT RUN |
+| case-43 | contains | NOT RUN |
+| case-44 | number | NOT RUN |
+| case-45 | exact | NOT RUN |
+| case-46 | judge | NOT RUN |
+| case-47 | exact | NOT RUN |
+| case-48 | contains | NOT RUN |
+| case-49 | exact | NOT RUN |
+| case-50 | judge | NOT RUN |
+| case-51 | contains | NOT RUN |
+| case-52 | contains | NOT RUN |
+| case-53 | contains | NOT RUN |
+| case-54 | contains | NOT RUN |
+| case-55 | number | NOT RUN |
+| case-56 | contains | NOT RUN |

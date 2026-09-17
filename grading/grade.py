@@ -72,6 +72,16 @@ def normalize(text):
 
 
 def extract_numbers(text):
+    """Return every number found in text, in order, as a list of floats.
+
+    Examples:
+        extract_numbers("5,280") -> [5280.0]
+        extract_numbers("5280 feet") -> [5280.0]
+        extract_numbers("growth of 12%") -> [12.0]
+        extract_numbers("144 divided by 12 is **12**.") -> [144.0, 12.0, 12.0]
+            (confirms markdown bold formatting around numbers doesn't
+            interfere with extraction)
+    """
     if not text:
         return []
     return [float(m.replace(",", "")) for m in NUMBER_RE.findall(text)]
@@ -189,43 +199,100 @@ def grade_case(case, result):
     return passed, output, why
 
 
+TIER_ORDER = {"easy": 0, "medium": 1, "hard": 2}
+
+
+# Pass Rate is computed over answered cases only (excludes Not Run), so a
+# case that was never run doesn't get silently counted as a failure and
+# drag the percentage down — Not Run is shown as its own column instead.
+def build_breakdown_table(title, key, description, cases_by_id, graded_lines):
+    answered = {}
+    passed = {}
+    not_run = {}
+    for g in graded_lines:
+        value = cases_by_id.get(g["id"], {}).get(key, "unknown")
+        if g["why"] == NO_RESULT_REASON:
+            not_run[value] = not_run.get(value, 0) + 1
+            continue
+        answered[value] = answered.get(value, 0) + 1
+        if g["passed"]:
+            passed[value] = passed.get(value, 0) + 1
+
+    all_values = set(answered) | set(not_run)
+
+    def sort_key(value):
+        return (TIER_ORDER.get(value, 99), value)
+
+    lines = [f"## Pass Rate by {title}", "", description, ""]
+    lines.append(f"| {title} | Passed | Answered | Pass Rate | Not Run |")
+    lines.append("|---|---|---|---|---|")
+    for value in sorted(all_values, key=sort_key):
+        p, a, nr = passed.get(value, 0), answered.get(value, 0), not_run.get(value, 0)
+        rate = f"{(p / a * 100):.0f}%" if a else "—"
+        lines.append(f"| {value} | {p} | {a} | {rate} | {nr} |")
+    lines.append("")
+    return lines
+
+
 def build_report(cases, results_by_id, graded_lines, run_id):
     cases_by_id = {c["id"]: c for c in cases}
     total = len(graded_lines)
+    not_run_lines = [g for g in graded_lines if g["why"] == NO_RESULT_REASON]
+    answered_count = total - len(not_run_lines)
     passed_count = sum(1 for g in graded_lines if g["passed"])
-    pass_rate = (passed_count / total * 100) if total else 0.0
+    pass_rate = (passed_count / answered_count * 100) if answered_count else 0.0
     model = next((r.get("model") for r in results_by_id.values() if r.get("model")), "unknown")
     date = datetime.date.today().isoformat()
 
     lines = ["# Grading Report", ""]
-    lines.append(f"**Date:** {date} · **Run:** {run_id} · **Model:** {model} · **Pass rate:** {passed_count}/{total} ({pass_rate:.0f}%)")
+    lines.append(
+        f"**Date:** {date} · **Run:** {run_id} · **Model:** {model} · "
+        f"**Pass rate:** {passed_count}/{answered_count} answered ({pass_rate:.0f}%) · "
+        f"**Not run:** {len(not_run_lines)}"
+    )
     lines.append("")
+
+    lines.extend(build_breakdown_table(
+        "Domain", "domain", "Domain = subject area of the question.", cases_by_id, graded_lines))
+    lines.extend(build_breakdown_table(
+        "Tier", "tier", "Tier = difficulty level assigned when the case was written.", cases_by_id, graded_lines))
+
+    lines.append("## Failures")
+    lines.append("")
+    failures = [g for g in graded_lines if not g["passed"] and g["why"] != NO_RESULT_REASON]
+    if not failures:
+        lines.append("None — every answered case passed.")
+    for g in failures:
+        prompt = cases_by_id.get(g["id"], {}).get("prompt", "(prompt unavailable)")
+        got_display = g["got"] if g["got"] not in (None, "") else "(empty output)"
+        lines.append(f"### {g['id']}")
+        lines.append(f"- Prompt: {prompt}")
+        lines.append(f"- Expected: {g['expected']}")
+        lines.append(f"- Got: {got_display}")
+        lines.append("")
+
+    lines.append("## Not Run")
+    lines.append("")
+    if not not_run_lines:
+        lines.append("None — every case was answered.")
+    for g in not_run_lines:
+        prompt = cases_by_id.get(g["id"], {}).get("prompt", "(prompt unavailable)")
+        lines.append(f"### {g['id']}")
+        lines.append(f"- Prompt: {prompt}")
+        lines.append(f"- Expected: {g['expected']}")
+        lines.append("")
 
     lines.append("## Cases")
     lines.append("")
     lines.append("| ID | Match | Result |")
     lines.append("|---|---|---|")
     for g in graded_lines:
-        mark = "PASS" if g["passed"] else "FAIL"
+        if g["why"] == NO_RESULT_REASON:
+            mark = "NOT RUN"
+        else:
+            mark = "PASS" if g["passed"] else "FAIL"
         lines.append(f"| {g['id']} | {g['match']} | {mark} |")
     lines.append("")
-
-    lines.append("## Failures")
-    lines.append("")
-    failures = [g for g in graded_lines if not g["passed"]]
-    if not failures:
-        lines.append("None — every case passed.")
-    for g in failures:
-        prompt = cases_by_id.get(g["id"], {}).get("prompt", "(prompt unavailable)")
-        if g["why"] == NO_RESULT_REASON:
-            got_display = "no result — the runner hasn't produced an answer for this case yet"
-        else:
-            got_display = g["got"] if g["got"] not in (None, "") else "(empty output)"
-        lines.append(f"### {g['id']}")
-        lines.append(f"- Prompt: {prompt}")
-        lines.append(f"- Expected: {g['expected']}")
-        lines.append(f"- Got: {got_display}")
-        lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
 

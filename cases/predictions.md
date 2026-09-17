@@ -26,6 +26,6 @@ Scored 8/13. All 5 misses were FAIL predictions on structural cases (41, 42, 44,
 
 My stated hypothesis — "knowledge traps don't work, only structural failures are genuinely hard" — was wrong in both halves. The structural cases passed too. Tokenization and multi-digit arithmetic are not reliable failure modes on this model.
 
-What actually failed: 6 of 7 failures were judge-mode cases — long explanatory answers containing a factual error. That's a different failure mode than anything I designed for, and the one worth targeting in a future hard tier.
+What actually failed: 6 of 7 failures were judge-mode cases. But on inspection, case-33, 36, and 38 are correct answers that cover the expected explanation and add more detail — the judge appears to be penalizing length or thoroughness rather than catching errors. Flagged to Paulet. The true pass rate is likely higher than 89%, and the "judge cases are the hard ones" conclusion may be measuring our rubric rather than the model.
 
 Open question: case-61 failed on exact-match-with-a-sentence, the same false-fail pattern I fixed in week 6. Needs the same fix.

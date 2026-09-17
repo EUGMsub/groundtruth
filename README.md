@@ -17,6 +17,17 @@
 {"id": "units-001", "run_id": "2026-08-09-a3f9c2d1", "passed": true, "match": "number", "expected": "5280", "got": "5280", "why": "number matched within tolerance"}
 ```
 
+## Sample output
+
+**Date:** 2026-09-17 · **Run:** 2026-09-17-b8322a69 · **Model:** claude-sonnet-4-6 · **Pass rate:** 54/61 answered (89%)
+
+| Tier | Passed | Answered | Rate |
+|---|---|---|---|
+| easy | 42 | 47 | 89% |
+| hard | 12 | 14 | 86% |
+
+**Note on judge verdicts:** Judge-mode cases are graded by a second model call and are not infallible. A hand-check of run 2026-09-17-b8322a69 found agreement on 8–9 of 10 verdicts, so expect roughly a 1–2 in 10 false-positive rate on judge cases. Exact, contains, and number matching are deterministic. Treat judge verdicts as flags for review, not final answers.
+
 ## Usage
 
 This section assumes you've never run a Python program from a terminal before. A **terminal** (also called a command line or shell) is the text-based window where you type commands instead of clicking things — on Windows that's PowerShell or Git Bash, on Mac/Linux it's usually called Terminal.
